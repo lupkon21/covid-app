@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 aktuálně</title>
+    <link rel="icon" href="templates/assets/virus.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="templates/style/style.css">    
+</head>
+<body>
+    <header>
+        <h1 class="display-1">Covid-19 aktuálně</h1>
+        <h1 class="display-6" id="date" n:if="isset($datum)">Dnes: {$datum|date: 'j. n. Y'}</h1>
+        <nav class="data-nav">
+            <button class="btn btn-active" id="btn-celkem">Celkem</button>
+            <button class="btn btn-inactive" id="btn-vcera">Včera</button>
+        </nav>
+    </header>
+
+    <div class="dashboard" n:if="$status_code == 200">
+        <div class="card data-celkem" n:if="isset($provedene_testy_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$provedene_testy_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Provedné testy celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($potvrzene_pripady_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$potvrzene_pripady_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Potvrzené případy celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($aktivni_pripady)">
+            <div class="card-body" >
+                <h1 class="title">{$aktivni_pripady|number:0, ',', ' '}</h1>
+                <p class="card-text">Aktivní případy</p> 
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($vyleceni)">
+            <div class="card-body">
+                <h1 class="title">{$vyleceni|number:0, ',', ' '}</h1>
+                <p class="card-text">Vyléčení celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($umrti)">
+            <div class="card-body">
+                <h1 class="title">{$umrti|number:0, ',', ' '}</h1>
+                <p class="card-text">Úmrtí celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($aktualne_hospitalizovani)">
+            <div class="card-body">
+                <h1 class="title">{$aktualne_hospitalizovani|number:0, ',', ' '}</h1>
+                <p class="card-text">Aktuálně hospitalizovaní</p> 
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($provedene_testy_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$provedene_testy_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Provedené testy včerejší den</p>
+
+                {if strtotime($datum) != strtotime($provedene_testy_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($provedene_testy_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$provedene_testy_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($potvrzene_pripady_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$potvrzene_pripady_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Potvrzené případy včerejší den</p>
+
+                {if strtotime($datum) != strtotime($potvrzene_pripady_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($potvrzene_pripady_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$potvrzene_pripady_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($provedene_antigenni_testy_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$provedene_antigenni_testy_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Provedené antigenní testy celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($provedene_antigenni_testy_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$provedene_antigenni_testy_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Provedené antigenní testy včerejší den</p>
+
+                {if strtotime($datum) != strtotime($provedene_antigenni_testy_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($provedene_antigenni_testy_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$provedene_antigenni_testy_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($vykazana_ockovani_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$vykazana_ockovani_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Vykázaná očkování celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($vykazana_ockovani_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$vykazana_ockovani_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Vykázaná očkování včerejší den</p> 
+
+                
+                {if strtotime($datum) != strtotime($vykazana_ockovani_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($vykazana_ockovani_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$vykazana_ockovani_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($potvrzene_pripady_65_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$potvrzene_pripady_65_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Potvrzené případy 65+ celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($potvrzene_pripady_65_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$potvrzene_pripady_65_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Potvrzené případy 65+ včerejší den</p>
+
+                {if strtotime($datum) != strtotime($potvrzene_pripady_65_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($potvrzene_pripady_65_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$potvrzene_pripady_65_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+
+        <div class="card data-celkem" n:if="isset($ockovane_osoby_celkem)">
+            <div class="card-body">
+                <h1 class="title">{$ockovane_osoby_celkem|number:0, ',', ' '}</h1>
+                <p class="card-text">Očkované osoby celkem</p> 
+            </div>
+        </div>
+
+        <div class="card data-vcera" n:if="isset($ockovane_osoby_vcerejsi_den)">
+            <div class="card-body">
+                <h1 class="title">{$ockovane_osoby_vcerejsi_den|number:0, ',', ' '}</h1>
+                <p class="card-text">Očkované osoby včerejší den</p>
+
+                {if strtotime($datum) != strtotime($ockovane_osoby_vcerejsi_den_datum.' +1 day')}
+                    <p class="card-text date-updated" n:if="isset($ockovane_osoby_vcerejsi_den_datum)"><small>Aktuální k 
+                    {$ockovane_osoby_vcerejsi_den_datum|date: 'j. n. Y'}</small></p>
+                {/if}
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-danger" n:if="$status_code == 404">
+        <span><strong>Chyba! </strong>Omlouváme se, ale data nebyla nalezena. Server má pravděpodobně dočasný výpadek. Zkuste to prosím znovu později.</span>
+    </div>
+        
+    <footer class="footer">
+        <p class="footer-text">&copy; {date("Y")} Lukáš Protiva, Martin Šoupa</p>
+    </footer>
+
+    <script src="templates/script/script.js"></script>
+</body>
+</html>

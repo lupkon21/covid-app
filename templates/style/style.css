@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    background-color: #171717;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Header */
+header {
+    background-color: #444444;
+    text-align: center;
+    color: #fff;
+    padding-bottom: 10px;
+}
+
+.display-1 {
+    color: #76ffdd;
+    font-weight: bolder;
+}
+
+/* Nav */
+.data-nav {
+    width: 25%;
+    margin: auto;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.btn {
+    padding: 5px 0px;
+    font-weight: bold;
+    box-shadow: none !important;
+}
+
+.btn-inactive {
+    color: #76ffdd;
+    border: 1px solid #76ffdd;
+}
+
+.btn-inactive:hover {
+    background-color: #76ffdd;
+    color: #171717;
+}
+
+.btn-active {
+    background-color: #76ffdd;
+    color: #171717;
+}
+
+/* Content - dashboard */
+.dashboard {
+    width: 50%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.card {
+    border-radius: 10px;
+    background-color: #444444;
+    color: #ededed;
+}
+
+.title {
+    color: #76ffdd;
+}
+
+.inactive {
+    display: none;
+}
+
+.date-updated {
+    color: #76ffdd;
+    margin-top: -20px;
+}
+
+/* Error */
+.alert {
+    width: 50%;
+    margin: auto;
+}
+
+/* Footer */
+.footer-text {
+    color: #ededed;
+    text-align: center;
+}
+
+.footer {
+    background-color: #444444;
+    line-height: 50px;
+    height: 50px;
+}
+
+/* Queries for responsibility */
+/* Tablet */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    header {
+        padding: 20px 0;
+    }
+
+    .dashboard {
+        width: 75%;
+        grid-template-columns: 50% 50%;
+    }
+
+    .data-nav {
+        width: 75%;
+    }
+}
+
+/* Phone */
+@media screen and (max-width: 480px) {
+    header {
+        padding: 20px 0;
+    }
+
+    header .display-1 {
+        font-size: 46px;
+    }
+
+    header .display-6 {
+        font-size: 23px;
+    }
+
+    .dashboard {
+        width: 75%;
+        grid-template-columns: 100%;
+    }
+
+    .data-nav {
+        width: 75%;
+    }
+}
+
+/* Phone - reversed */
+@media screen and (max-height: 768px) {
+    header {
+        padding: 20px 0;
+    }
+
+    .dashboard {
+        width: 75%;
+        grid-template-columns: 50% 50%;
+    }
+
+    .data-nav {
+        width: 75%;
+    }
+}
+
+/* Tablet - reversed */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    header {
+        padding: 20px 0;
+    }
+
+    .dashboard {
+        width: 75%;
+        grid-template-columns: 50% 50%;
+    }
+
+    .data-nav {
+        width: 75%;
+    }
+}
